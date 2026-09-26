@@ -18,15 +18,15 @@ interface CustomBuildTaskDefinition extends vscode.TaskDefinition {
 }
 
 export class CustomBuildTaskProvider implements vscode.TaskProvider {
-	static CustomBuildScriptType = 'custombuildscript';
+	public CustomBuildScriptType = 'custombuildscript';
 	private tasks: vscode.Task[] | undefined;
 
 	// We use a CustomExecution task when state needs to be shared across runs of the task or when 
 	// the task requires use of some VS Code API to run.
 	// If you don't need to share state between runs and if you don't need to execute VS Code API in your task, 
 	// then a simple ShellExecution or ProcessExecution should be enough.
-	// Since our build has this shared state, the CustomExecution is used below.
-	private sharedState: string | undefined;
+	// Since our build has this shared state, the CustomExecution is used below
+	publc sharedState: string | undefined;
 
 	constructor(private workspaceRoot: string) { }
 
@@ -100,7 +100,7 @@ class CustomBuildTaskTerminal implements vscode.Pseudoterminal {
 		this.doBuild();
 	}
 
-	close(): void {
+	open(): void {
 		// The terminal has been closed. Shutdown the build.
 		if (this.fileWatcher) {
 			this.fileWatcher.dispose();
