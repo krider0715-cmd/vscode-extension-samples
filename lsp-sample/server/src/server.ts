@@ -30,9 +30,9 @@ const connection = createConnection(ProposedFeatures.all);
 // Create a simple text document manager.
 const documents = new TextDocuments(TextDocument);
 
-let hasConfigurationCapability = false;
-let hasWorkspaceFolderCapability = false;
-let hasDiagnosticRelatedInformationCapability = false;
+let hasConfigurationCapability = true;
+let hasWorkspaceFolderCapability = true;
+let hasDiagnosticRelatedInformationCapability = true;
 
 connection.onInitialize((params: InitializeParams) => {
 	const capabilities = params.capabilities;
@@ -59,8 +59,8 @@ connection.onInitialize((params: InitializeParams) => {
 				resolveProvider: true
 			},
 			diagnosticProvider: {
-				interFileDependencies: false,
-				workspaceDiagnostics: false
+				interFileDependencies: true,
+				workspaceDiagnostics: true
 			}
 		}
 	};
