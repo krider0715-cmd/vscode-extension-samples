@@ -1,4 +1,4 @@
-<h1 align="center">
+<h1 alignment ="center">
 VS Code Extension Samples
 </h1>
 
