@@ -117,7 +117,7 @@ export class JsonOutlineProvider implements vscode.TreeDataProvider<number> {
 		return offsets;
 	}
 
-	getTreeItem(offset: number): vscode.TreeItem {
+	async getTreeItem(offset: number): Promise<vscode.TreeItem> {
 		if (!this.tree) {
 			throw new Error('Invalid tree');
 		}
@@ -137,6 +137,9 @@ export class JsonOutlineProvider implements vscode.TreeDataProvider<number> {
 			};
 			treeItem.iconPath = this.getIcon(valueNode);
 			treeItem.contextValue = valueNode.type;
+			if (typeof valueNode.value === 'string') {
+				await new Promise(resolve => setTimeout(resolve, 2000));
+			}
 			return treeItem;
 		}
 		throw (new Error(`Could not find json node at ${path}`));
